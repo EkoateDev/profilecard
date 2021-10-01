@@ -29,7 +29,8 @@
 				>
 					Create a Driver
 				</button>
-			</div><br><br>
+			</div>
+			<br /><br />
 
 			<!-- Modal -->
 			<div
@@ -42,26 +43,83 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-							<button
-								type="button"
-								class="btn-close"
-								data-bs-dismiss="modal"
-								aria-label="Close"
-							></button>
+							<h5 class="modal-title" id="exampleModalLabel">
+								Enter Driver's Details
+							</h5>
 						</div>
-						<div class="modal-body">...</div>
-						<div class="modal-footer">
-							<button
-								type="button"
-								class="btn btn-secondary"
-								data-bs-dismiss="modal"
-							>
-								Close
-							</button>
-							<button type="button" class="btn btn-primary">
-								Save changes
-							</button>
+						<div class="modal-body">
+							<form class="align-items-center" action="" method="POST">
+								<div class="form-floating mb-3">
+									<input
+										type="text"
+										class="form-control"
+										name="title"
+										id="title"
+										placeholder="Enter your Name"
+										value=""
+										required
+									/>
+									<label for="title" class="form-label">Name</label>
+								</div>
+
+								<div class="form-floating mb-3">
+									<input
+										type="text"
+										class="form-control"
+										id="description"
+										placeholder="Description Here"
+										style="height: 100px"
+										value=""
+										required
+									/>
+									<label for="description">Description</label>
+								</div>
+
+								<div class="form-floating mb-3">
+									<input
+										type="text"
+										class="form-control"
+										name="champ"
+										id="champ"
+										placeholder="Enter the World championship record"
+										value=""
+										required
+									/>
+									<label for="championship" class="form-label"
+										>Championship</label
+									>
+								</div>
+
+								<div class="form-floating mb-3">
+									<input
+										type="text"
+										class="form-control"
+										name="team"
+										id="team"
+										placeholder="Enter your Team"
+										value=""
+										required
+									/>
+									<label for="team" class="form-label">Team</label>
+								</div>
+								<div class="mb-3">
+									<label for="image" class="form-label">Select Image</label>
+									<input class="form-control" type="file" id="image" required/>
+								</div>
+
+								<div class="col-12">
+									<button
+										type="button"
+										class="btn btn-outline-secondary"
+										data-bs-dismiss="modal"
+									>
+										Close
+									</button>
+									<button type="submit" class="btn btn-outline-success">
+										Save Driver
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
