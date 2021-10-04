@@ -82,24 +82,24 @@
         while ($record = mysqli_fetch_array($select)) {
 
         ?>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
                 <div class="col">
                     <div class="card h-100">
                         <div class="avatar">
                             <img src="uploads/<?php echo $record['image']; ?>" class="card-img-top" alt="" />
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-center" id="title"><?php echo $record['title']; ?>
+                            <h5 class="card-title text-center text-uppercase text-muted" id="title"><?php echo $record['title']; ?>
                             </h5>
-                            <div class="" id="description"><?php echo $record['description']; ?></div>
-                            <div class="" id="champ"><?php echo $record['champ']; ?></div>
-                            <div class="" id="team"><?php echo $record['team']; ?></div><br>
-                            <a href="#?id=<?php echo $id ?>" class="btn btn-outline-success">Edit Driver</a>
-                            <a href="#?id=<?php echo $id ?>" class="btn btn-outline-danger">Delete Driver</a>
+                            <div class="text-center fs-4" id="description">Brief Details:<br> <?php echo $record['description']; ?></div>
+                            <div class="text-center fs-5 text-white bg-success" id="champ">Championship:<br> <?php echo $record['champ']; ?></div>
+                            <div class="text-center fs-5 text-white bg-dark" id="team">Team: <?php echo $record['team']; ?></div><br>
+                            <a href="editdriver.php" class="btn btn-outline-success" >Edit Driver</a>
+                            <a href="#" class="btn btn-outline-danger">Delete Driver</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br>
 
         <?php
         }
