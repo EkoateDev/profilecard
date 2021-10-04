@@ -21,6 +21,11 @@
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Edit a Driver
             </button>
+        </div><br>
+        <div class="">
+            <a href="index.php" class="btn btn-outline-warning">
+                Go Back
+            </a>
         </div>
         <br /><br />
 
