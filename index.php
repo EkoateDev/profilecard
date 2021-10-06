@@ -36,8 +36,8 @@
                     <div class="modal-body">
                         <form class="align-items-center" action="upload.php" method="POST" onSubmit="uploadSubmit();" enctype="multipart/form-data">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Enter your Name" value="" required />
-                                <label for="title" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" value="" required />
+                                <label for="name" class="form-label">Name</label>
                             </div>
 
                             <div class="form-floating mb-3">
@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="champ" id="champ" placeholder="Enter the World championship record" value="" required />
+                                <input type="text" class="form-control" name="champ" id="champ" placeholder="Enter the World championship row" value="" required />
                                 <label for="championship" class="form-label">Championship</label>
                             </div>
 
@@ -56,7 +56,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Select Image</label>
-                                <input class="form-control" type="file" name="image" id="fileUpload" required />
+                                <input class="form-control" type="file" name="image" id="file-Upload" required />
                             </div>
 
                             <div class="col-12">
@@ -79,23 +79,29 @@
 
         $select = mysqli_query($conn, "SELECT * From drivers"); // fetch data from database
 
-        while ($record = mysqli_fetch_array($select)) {
+        while ($row = mysqli_fetch_array($select)) {
+            $id = $row['id'];
+            $name = $row['name'];
+            $description = $row['description'];
+            $champ = $row['champ'];
+            $team = $row['team'];
+            $fileName = $row['image'];
 
         ?>
-            <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+            <div class="row row-cols-3 text-center">
                 <div class="col">
                     <div class="card h-100">
                         <div class="avatar">
-                            <img src="uploads/<?php echo $record['image']; ?>" class="card-img-top" alt="" />
+                            <img src="uploads/<?php echo $row['image']; ?>" class="card-img-top" alt="" />
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-center text-uppercase text-muted" id="title"><?php echo $record['title']; ?>
+                            <h5 class="card-title text-center text-uppercase text-muted" id="title"><?php echo $row['name']; ?>
                             </h5>
-                            <div class="text-center fs-4" id="description">Brief Details:<br> <?php echo $record['description']; ?></div>
-                            <div class="text-center fs-5 text-white bg-success" id="champ">Championship:<br> <?php echo $record['champ']; ?></div>
-                            <div class="text-center fs-5 text-white bg-dark" id="team">Team: <?php echo $record['team']; ?></div><br>
-                            <a href="editdrivers.php" class="btn btn-outline-success" >Edit Driver</a>
-                            <a href="#" class="btn btn-outline-danger">Delete Driver</a>
+                            <div class="text-center fs-4" id="description">Brief Details:<br> <?php echo $row['description']; ?></div>
+                            <div class="text-center fs-5 text-white bg-success" id="champ">Championship:<br> <?php echo $row['champ']; ?></div>
+                            <div class="text-center fs-5 text-white bg-dark" id="team">Team: <?php echo $row['team']; ?></div><br>
+                            <a href="editdrivers.php?id=<?php echo $id ?>" role="button" class="btn btn-outline-success">Edit Driver</a>
+                            <a href="deletedriver.php?id=<?php echo $id?>" class="btn btn-outline-danger">Delete Driver</a>
                         </div>
                     </div>
                 </div>
@@ -110,6 +116,7 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="verification.js"></script>
+    </div>
 </body>
 
 </html>
