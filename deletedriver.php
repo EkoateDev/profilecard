@@ -8,7 +8,8 @@ if (isset($_GET['id'])) {
     $select = mysqli_query($conn, $query);
 
     if ($select) {
-        header("Location:display.php");
+        header("Location:index.php");
+        echo 'Driver Deleted';
     } else {
         echo 'Kindly check your query';
     }

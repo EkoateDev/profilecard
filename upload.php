@@ -11,8 +11,15 @@ $fileName = $_FILES['image']['name'];
 $tempName = $_FILES['image']['tmp_name'];
 $folder = 'uploads/' . $fileName;
 
-$sql = "INSERT INTO `drivers` (`id`, `name`, `description`, `champ`, `team`, `image`)
-VALUES ('0', '$name', '$description', '$champions', '$team', '$fileName')";
+if ($_FILES['image']['size'] > (2097152 / 2)) {
+    echo 'Sorry, your file is too large.';
+    die;
+}
+
+$sql = "INSERT INTO `drivers` (`name`, `description`, `champ`, `team`, `image`)
+VALUES ('$name', '$description', '$champions', '$team', '$fileName')";
+
+
 
 if (move_uploaded_file($tempName, $folder)) {
     $msg = 'Image uploaded succesfuly';
@@ -20,9 +27,6 @@ if (move_uploaded_file($tempName, $folder)) {
     $msg = 'Failed to upload image';
 }
 
-if ($_FILES['image']['size'] > 2097152) {
-    echo 'Sorry, your file is too large.';
-}
 
 if ($conn->query($sql) === true) {
     header('Location:index.php');
