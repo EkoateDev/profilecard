@@ -8,8 +8,8 @@ $description = $_POST['description'];
 $champions = $_POST['champ'];
 $team = $_POST['team'];
 $fileName = $_FILES['image']['name'];
-$tempName = $_FILES['image']['tmp_name'];
-$folder = 'uploads/' . $fileName;
+$tempFilePath = $_FILES['image']['tmp_name'];
+$path = 'uploads/' . $fileName;
 
 if ($_FILES['image']['size'] > (2097152 / 2)) {
     echo 'Sorry, your file is too large.';
@@ -21,7 +21,7 @@ VALUES ('$name', '$description', '$champions', '$team', '$fileName')";
 
 
 
-if (move_uploaded_file($tempName, $folder)) {
+if (move_uploaded_file($tempFilePath, $path)) {
     $msg = 'Image uploaded succesfuly';
 } else {
     $msg = 'Failed to upload image';
