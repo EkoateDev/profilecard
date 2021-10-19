@@ -90,7 +90,7 @@
                         <div class="card-img-top">
                             <?php
                             $path = 'images/' . $image;
-                            $imageSource =  'data:image/' . mime_content_type($path) . ';base64,' . base64_encode(file_get_contents($path));
+                            $imageSource =  'data:' . mime_content_type($path) . ';base64,' . base64_encode(file_get_contents($path));
                             ?>
                             <img src="<?php echo $imageSource; ?>" />
                         </div>
