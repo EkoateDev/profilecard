@@ -1,32 +1,71 @@
 <?php
-
 require_once "connection.php";
 
-$msg = "";
-$name = $_POST['name'];
-$description = $_POST['description'];
-$champions = $_POST['champ'];
-$team = $_POST['team'];
-$fileName = $_FILES['image']['name'];
-$tempFilePath = $_FILES['image']['tmp_name'];
-$path = 'uploads/' . $fileName;
+$name = '';
+$image = '';
+$description = '';
+$champions = '';
+$team = '';
 
-if ($_FILES['image']['size'] > (2097152 / 2)) {
-    echo 'Sorry, your file is too large.';
+if (isset($_POST['name'])) {
+    $name = $_POST['name'];
+}
+
+if (isset($_POST['description'])) {
+    $description = $_POST['description'];
+}
+
+if (isset($_POST['champ'])) {
+    $champions = $_POST['champ'];
+}
+
+if (isset($_POST['team'])) {
+    $team = $_POST['team'];
+}
+
+
+if (isset($_FILES['image'])) {
+    $errors = array();
+    $allowedExtension = ['jpeg', 'jpg', 'png', 'gif'];
+    $fileName = $_FILES['image']['name'];
+    $fileExtension = strtolower(end(explode('.', $fileName)));
+
+    $fileSize = $_FILES['image']['size'];
+    $tempFilePath = $_FILES['image']['tmp_name'];
+    // echo $tempFilePath;
+    // echo '<br>';
+    $path = 'images/' . $fileName;
+    $type = pathinfo($tempFilePath, PATHINFO_EXTENSION);
+    $data = file_get_contents($tempFilePath);
+    $base64 = 'data:image/' . $type . ';base64' . base64_encode($data);
+    // echo 'The Base64 file is ' . $base64;
+}
+if (in_array($fileExtension, $allowedExtension) === false) {
+    $errors[] = 'The Extension or File you Selected is not valid';
+}
+
+if ($fileSize > (2097152)) {
+    $errors[] = 'Sorry, your file is too large.';
+    echo '<br>';
+    echo 'File must be less tham 2mb';
     die;
 }
 
-$sql = "INSERT INTO `drivers` (`name`, `description`, `champ`, `team`, `image`)
-VALUES ('$name', '$description', '$champions', '$team', '$fileName')";
+$sql = "INSERT INTO `drivers` (`name`, `description`, `champ`, `team`, `image_name`)
+    VALUES ('$name', '$description', '$champions', '$team', '$fileName')";
 
-
-
-if (move_uploaded_file($tempFilePath, $path)) {
-    $msg = 'Image uploaded succesfuly';
+if (empty($errors)) {
+    if (move_uploaded_file($tempFilePath, $path)); {
+        echo "<script>
+        alert('File Uploaded');
+        </script>";
+        header('location.index.php');
+    }
 } else {
-    $msg = 'Failed to upload image';
+    foreach ($errors as $error) {
+        echo $error, '<br>';
+    }
 }
-
 
 if ($conn->query($sql) === true) {
     header('Location:index.php');

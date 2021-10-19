@@ -41,17 +41,17 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="description" name="description" placeholder="Description Here" style="height: 100px" value="" required />
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Description Here" style="height: 100px" />
                                 <label for="description">Description</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="champ" id="champ" placeholder="Enter the World championship row" value="" required />
+                                <input type="text" class="form-control" name="champ" id="champ" placeholder="Enter the World championship row" />
                                 <label for="championship" class="form-label">Championship</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="team" id="team" placeholder="Enter your Team" value="" required />
+                                <input type="text" class="form-control" name="team" id="team" placeholder="Enter your Team" required />
                                 <label for="team" class="form-label">Team</label>
                             </div>
                             <div class="mb-3">
@@ -81,27 +81,27 @@
 
         while ($row = mysqli_fetch_array($select)) {
             $id = $row['id'];
-            $name = $row['name'];
-            $description = $row['description'];
-            $champ = $row['champ'];
-            $team = $row['team'];
-            $fileName = $row['image'];
+            $image = $row['image_name'];
 
         ?>
             <div class="row row-cols-3 text-center">
                 <div class="col">
                     <div class="card h-100">
-                        <div class="avatar">
-                            <img src="uploads/<?php echo $row['image']; ?>" class="card-img-top" alt="" />
+                        <div class="card-img-top">
+                            <?php
+                            $path = 'images/' . $image;
+                            $imageSource =  'data:image/' . mime_content_type($path) . ';base64,' . base64_encode(file_get_contents($path));
+                            ?>
+                            <img src="<?php echo $imageSource; ?>" />
                         </div>
                         <div class="card-body">
                             <h5 class="card-title text-center text-uppercase text-muted" id="title"><?php echo $row['name']; ?>
                             </h5>
-                            <div class="text-center fs-4" id="description">Brief Details:<br> <?php echo $row['description']; ?></div>
-                            <div class="text-center fs-5 text-white bg-success" id="champ">Championship:<br> <?php echo $row['champ']; ?></div>
-                            <div class="text-center fs-5 text-white bg-dark" id="team">Team: <?php echo $row['team']; ?></div><br>
+                            <div class="text-center fs-4">Brief Details:<br> <?php echo $row['description']; ?></div>
+                            <div class="text-center fs-5 text-white bg-success">Championship:<br> <?php echo $row['champ']; ?></div>
+                            <div class="text-center fs-5 text-white bg-dark">Team: <?php echo $row['team']; ?></div><br>
                             <a href="editdrivers.php?id=<?php echo $id ?>" role="button" class="btn btn-outline-success">Edit Driver</a>
-                            <a href="deletedriver.php?id=<?php echo $id?>" class="btn btn-outline-danger">Delete Driver</a>
+                            <a href="deletedriver.php?id=<?php echo $id ?>" class="btn btn-outline-danger">Delete Driver</a>
                         </div>
                     </div>
                 </div>
