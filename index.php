@@ -92,7 +92,7 @@
                             $path = 'images/' . $image;
                             $imageSource =  'data:' . mime_content_type($path) . ';base64,' . base64_encode(file_get_contents($path));
                             ?>
-                            <img src="<?php echo $imageSource; ?>" />
+                            <img src="<?php echo $imageSource; ?>" class="card-img-top" />
                         </div>
                         <div class="card-body">
                             <h5 class="card-title text-center text-uppercase text-muted" id="title"><?php echo $row['name']; ?>
